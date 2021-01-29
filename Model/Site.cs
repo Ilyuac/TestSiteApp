@@ -7,6 +7,6 @@ namespace TestSiteApp.Model
         public int ID { get; set; }
         public string Name { get; set; }
         public string URL { get; set; }
-        public DateTime TimeInterval { get; set; }
+        public int ms_TimeInterval { get; set; }
     }
 }

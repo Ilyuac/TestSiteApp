@@ -1,61 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestSiteApp.Model;
 
 namespace TestSiteApp.Controller
 {
-    public class AppController
+    public class AppController:IDisposable
     {
-        public List<Task> Tasks { get; set; }
-        List<Site> Sites;
+        public List<Site> Sites { get; private set; }
+        int CountSite { get { return Sites.Count; } }
+        DataGridView DGV;
+        ThreadController threadController;
         public AppController()
+        {
+            LoadDB();
+            threadController = new ThreadController();
+            threadController.Run(Sites);
+
+            threadController.UpdateDGV+=new TestPing(Tick);
+        }
+        public void LoadDB()
         {
             using (var db = new DBController())
             {
                 Sites = db.GetSites;
             }
-
-            foreach (var site in Sites)
-            {
-                StartThread(site);
-            }
         }
-
+        public void AddSite(Site site)
+        {
+            site.ID = Sites[CountSite - 1].ID+1;
+            Sites.Add(site);
+        }
         public void AddResultColumn(ref DataGridView view)
         {
+            DGV = view;
             DataGridViewColumn boolColumn = new DataGridViewCheckBoxColumn();
             boolColumn.HeaderText = "Result";
             boolColumn.Name = "Result";
 
             view.Columns.Add(boolColumn);
         }
-        private void StartThread(Site site)
+        public void Tick(List<Tuple<Site, bool>> results)
         {
-            Task<Tuple<Site,bool>> task = new Task<Tuple<Site, bool>>(() =>
-            {
-                Thread.Sleep(site.ms_TimeInterval);
-                return new Tuple<Site, bool>(site, testSite(site.URL));
-            });
-            task.Start();
-            Tasks.Add(task);
-        }
-        private bool testSite(string url)
-        {
-            Uri uri = new Uri(url);
             try
             {
-                HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(uri);
-                HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                if (results != null)
+                {
+                    foreach (DataGridViewRow row in DGV.Rows)
+                    {
+                        foreach (var result in results)
+                        {
+                            if (result != null)
+                            {
+                                if (row.Cells[0].Value.ToString() == result.Item1.ID.ToString())
+                                {
+                                    row.Cells["Result"].Value = result.Item2;
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            catch
-            {
-                return false;
-            }
-            return true;
+            catch { }
+        }
+        public void Dispose()
+        {
+            threadController.Dispose();
         }
     }
 }

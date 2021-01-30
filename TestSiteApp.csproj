@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Controller\AppController.cs" />
     <Compile Include="Controller\DBController.cs" />
+    <Compile Include="Controller\ThreadController.cs" />
     <Compile Include="Model\ContextDB.cs" />
     <Compile Include="Model\Enum.cs" />
     <Compile Include="Model\Site.cs" />

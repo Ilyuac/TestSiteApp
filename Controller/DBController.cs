@@ -14,18 +14,15 @@ namespace TestSiteApp.Controller
         {
             DB = new ContextDB();
         }
-
         public void InsertInto(Site site)
         {
             DB.Sites.Add(site);
-            DB.SaveChangesAsync();
+            DB.SaveChanges();
         }
-        public void Delete(params Site[] sites)
+        public void Delete(int idSites)
         {
-            foreach (var site in sites)
-            {
-                DB.Sites.Remove(site);
-            }
+            var site = DB.Sites.FirstOrDefault(s => s.ID == idSites);
+            DB.Sites.Remove(site);
             DB.SaveChangesAsync();
         }
         public void Update<T>(int id, ParametrName parametrName, T parametr)
@@ -39,11 +36,11 @@ namespace TestSiteApp.Controller
                     DB.Sites.FirstOrDefault(s => s.ID == id).URL = parametr.ToString();
                     break;
                 case ParametrName.TimeInterval:
-                    DB.Sites.FirstOrDefault(s => s.ID == id).ms_TimeInterval = Convert.ToInt32(parametr);
+                    DB.Sites.FirstOrDefault(s => s.ID == id).ms_TimeInterval = Convert.ToInt32(parametr.ToString());
                     break;
             }
+            DB.SaveChanges();
         }
-
         public void Dispose()
         {
         }

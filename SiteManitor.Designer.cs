@@ -105,6 +105,7 @@
             this.msTimeIntervalDataGridViewTextBoxColumn});
             this.DGViewResult.DataSource = this.siteBindingSource;
             this.DGViewResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGViewResult.Enabled = false;
             this.DGViewResult.Location = new System.Drawing.Point(3, 3);
             this.DGViewResult.Name = "DGViewResult";
             this.DGViewResult.ReadOnly = true;
@@ -181,7 +182,9 @@
             // 
             // cBoxID
             // 
+            this.cBoxID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxID.FormattingEnabled = true;
+            this.cBoxID.ItemHeight = 13;
             this.cBoxID.Location = new System.Drawing.Point(161, 53);
             this.cBoxID.Name = "cBoxID";
             this.cBoxID.Size = new System.Drawing.Size(140, 21);
@@ -203,7 +206,7 @@
             this.rButDel.Location = new System.Drawing.Point(178, 19);
             this.rButDel.Name = "rButDel";
             this.rButDel.Size = new System.Drawing.Size(68, 17);
-            this.rButDel.TabIndex = 12;
+            this.rButDel.TabIndex = 3;
             this.rButDel.TabStop = true;
             this.rButDel.Text = "Удалить";
             this.rButDel.UseVisualStyleBackColor = true;
@@ -215,7 +218,7 @@
             this.rButUpdate.Location = new System.Drawing.Point(95, 19);
             this.rButUpdate.Name = "rButUpdate";
             this.rButUpdate.Size = new System.Drawing.Size(76, 17);
-            this.rButUpdate.TabIndex = 11;
+            this.rButUpdate.TabIndex = 2;
             this.rButUpdate.TabStop = true;
             this.rButUpdate.Text = "Изменить";
             this.rButUpdate.UseVisualStyleBackColor = true;
@@ -227,7 +230,7 @@
             this.rButAdd.Location = new System.Drawing.Point(13, 19);
             this.rButAdd.Name = "rButAdd";
             this.rButAdd.Size = new System.Drawing.Size(75, 17);
-            this.rButAdd.TabIndex = 10;
+            this.rButAdd.TabIndex = 1;
             this.rButAdd.TabStop = true;
             this.rButAdd.Text = "Добавить";
             this.rButAdd.UseVisualStyleBackColor = true;
@@ -238,7 +241,7 @@
             this.butSave.Location = new System.Drawing.Point(167, 237);
             this.butSave.Name = "butSave";
             this.butSave.Size = new System.Drawing.Size(134, 23);
-            this.butSave.TabIndex = 1;
+            this.butSave.TabIndex = 10;
             this.butSave.Text = "Изменить";
             this.butSave.UseVisualStyleBackColor = true;
             this.butSave.Click += new System.EventHandler(this.butSave_Click);
@@ -248,7 +251,7 @@
             this.butDel.Location = new System.Drawing.Point(167, 266);
             this.butDel.Name = "butDel";
             this.butDel.Size = new System.Drawing.Size(134, 23);
-            this.butDel.TabIndex = 9;
+            this.butDel.TabIndex = 11;
             this.butDel.Text = "Удалить выделенное";
             this.butDel.UseVisualStyleBackColor = true;
             this.butDel.Click += new System.EventHandler(this.butDel_Click);
@@ -258,14 +261,14 @@
             this.tBoxName.Location = new System.Drawing.Point(161, 90);
             this.tBoxName.Name = "tBoxName";
             this.tBoxName.Size = new System.Drawing.Size(140, 20);
-            this.tBoxName.TabIndex = 2;
+            this.tBoxName.TabIndex = 5;
             // 
             // butAdd
             // 
             this.butAdd.Location = new System.Drawing.Point(167, 208);
             this.butAdd.Name = "butAdd";
             this.butAdd.Size = new System.Drawing.Size(134, 23);
-            this.butAdd.TabIndex = 8;
+            this.butAdd.TabIndex = 9;
             this.butAdd.Text = "Добавить";
             this.butAdd.UseVisualStyleBackColor = true;
             this.butAdd.Click += new System.EventHandler(this.butAdd_Click);
@@ -275,7 +278,8 @@
             this.tBoxInterval.Location = new System.Drawing.Point(161, 169);
             this.tBoxInterval.Name = "tBoxInterval";
             this.tBoxInterval.Size = new System.Drawing.Size(140, 20);
-            this.tBoxInterval.TabIndex = 3;
+            this.tBoxInterval.TabIndex = 8;
+            this.tBoxInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPress);
             // 
             // label3
             // 
@@ -291,7 +295,7 @@
             this.tBoxUrl.Location = new System.Drawing.Point(161, 131);
             this.tBoxUrl.Name = "tBoxUrl";
             this.tBoxUrl.Size = new System.Drawing.Size(140, 20);
-            this.tBoxUrl.TabIndex = 4;
+            this.tBoxUrl.TabIndex = 7;
             // 
             // label2
             // 
@@ -332,6 +336,7 @@
             this.msTimeIntervalDataGridViewTextBoxColumn1});
             this.DGViewUpdate.DataSource = this.siteBindingSource;
             this.DGViewUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGViewUpdate.Enabled = false;
             this.DGViewUpdate.Location = new System.Drawing.Point(3, 16);
             this.DGViewUpdate.Name = "DGViewUpdate";
             this.DGViewUpdate.Size = new System.Drawing.Size(445, 369);

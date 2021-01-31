@@ -134,5 +134,13 @@ namespace TestSiteApp
             AppController.Dispose();
             Application.Exit();
         }
+        private void KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if(!Char.IsDigit(ch))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

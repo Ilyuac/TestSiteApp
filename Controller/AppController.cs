@@ -26,11 +26,6 @@ namespace TestSiteApp.Controller
                 Sites = db.GetSites;
             }
         }
-        public void AddSite(Site site)
-        {
-            site.ID = Sites[CountSite - 1].ID+1;
-            Sites.Add(site);
-        }
         public void AddResultColumn(ref DataGridView view)
         {
             DGV = view;

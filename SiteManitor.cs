@@ -40,14 +40,10 @@ namespace TestSiteApp
                 URL = tBoxUrl.Text,
                 ms_TimeInterval = Convert.ToInt32(tBoxInterval.Text)
             };
-            AppController.AddSite(site);
 
             using (var db = new DBController())
             {
-                for (int i = 0; i < DGViewUpdate.Rows.Count - 1; i++)
-                {
-                    db.InsertInto(site);
-                }
+                db.InsertInto(site);
             }
             LoadData();
         }

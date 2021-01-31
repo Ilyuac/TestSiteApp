@@ -13,6 +13,10 @@ namespace TestSiteApp.Controller
         public DBController()
         {
             DB = new ContextDB();
+            if(GetSites.Count == 0)
+            {
+                TestValues();
+            }
         }
         public void InsertInto(Site site)
         {
@@ -43,6 +47,48 @@ namespace TestSiteApp.Controller
         }
         public void Dispose()
         {
+        }
+        private void TestValues()
+        {
+            List<Site> sites = new List<Site>()
+            {
+                new Site()
+                {
+                    Name="Яндекс",
+                    URL="yandex.ru",
+                    ms_TimeInterval=500
+                },
+                new Site()
+                {
+                    Name="Ян",
+                    URL="yan123.ru",
+                    ms_TimeInterval=500
+                },
+                new Site()
+                {
+                    Name="Google",
+                    URL="www.google.ru",
+                    ms_TimeInterval=1000
+                },
+                new Site()
+                {
+                    Name="Googleion",
+                    URL="Googlion1.ru",
+                    ms_TimeInterval=500
+                },
+                new Site()
+                {
+                    Name="Habr",
+                    URL="habr.com",
+                    ms_TimeInterval=500
+                }
+            };
+
+            using (var db = new ContextDB())
+            {
+                db.Sites.AddRange(sites);
+                db.SaveChanges();
+            }
         }
     }
 }

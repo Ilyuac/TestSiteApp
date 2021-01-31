@@ -252,7 +252,7 @@
             this.butDel.Name = "butDel";
             this.butDel.Size = new System.Drawing.Size(134, 23);
             this.butDel.TabIndex = 11;
-            this.butDel.Text = "Удалить выделенное";
+            this.butDel.Text = "Удалить";
             this.butDel.UseVisualStyleBackColor = true;
             this.butDel.Click += new System.EventHandler(this.butDel_Click);
             // 

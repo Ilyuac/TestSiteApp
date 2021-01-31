@@ -11,12 +11,13 @@ namespace TestSiteApp.Controller
     {
         public event TestPing UpdateDGV;
         private List<Site> Sites;
+        private Thread thread;
         List<Tuple<Site, bool>> results;
         public void Run(List<Site> sites)
         {
             Sites = sites;
             results = new List<Tuple<Site, bool>>();
-            Thread thread = new Thread(StartThreads);
+            thread = new Thread(StartThreads);
             thread.Start();
         }
         private void StartThreads()
@@ -65,6 +66,12 @@ namespace TestSiteApp.Controller
         }
         public void Dispose()
         {
+            try
+            {
+                if(thread!=null)
+                    thread.Abort();
+            }
+            catch { }
         }
     }
 }

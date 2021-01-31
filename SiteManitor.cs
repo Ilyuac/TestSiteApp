@@ -46,6 +46,7 @@ namespace TestSiteApp
                 db.InsertInto(site);
             }
             LoadData();
+            ReLoadcBox();
         }
         private void butDel_Click(object sender, EventArgs e)
         {
@@ -54,6 +55,7 @@ namespace TestSiteApp
                 db.Delete(Convert.ToInt32(cBoxID.Text));
             }
             LoadData();
+            ReLoadcBox();
         }
         private void LoadData()
         {
@@ -64,6 +66,10 @@ namespace TestSiteApp
         private void _Selected(object sender, EventArgs e)
         {
             rButAdd.Checked = true;
+            ReLoadcBox();
+        }
+        private void ReLoadcBox()
+        {
             cBoxID.Items.Clear();
             foreach (var site in AppController.Sites)
             {

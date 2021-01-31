@@ -13,18 +13,19 @@ namespace TestSiteApp.Controller
         ThreadController threadController;
         public AppController()
         {
-            LoadDB();
             threadController = new ThreadController();
-            threadController.Run(Sites);
+            LoadDB();
 
             threadController.UpdateDGV+=new TestPing(Tick);
         }
         public void LoadDB()
         {
+            threadController.Dispose();
             using (var db = new DBController())
             {
                 Sites = db.GetSites;
             }
+            threadController.Run(Sites);
         }
         public void AddResultColumn(ref DataGridView view)
         {
